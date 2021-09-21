@@ -13,7 +13,9 @@ const getEnv = (variable: string, optional: boolean = false) => {
 }
 
 export const PORT = getEnv("PORT")!
-
+export const DATABASE_NAME = getEnv("DATABASE_NAME")!
+export const DATABASE_URL = getEnv("DATABASE_URL")!
+  
 export const env = {
   isDev: String(process.env.NODE_ENV).toLowerCase().includes('dev'),
   isTest: String(process.env.NODE_ENV).toLowerCase().includes('test'),
