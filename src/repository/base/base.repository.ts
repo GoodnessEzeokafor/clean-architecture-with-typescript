@@ -15,7 +15,7 @@ export abstract class BaseRepository<T> implements IDBWrite<OptionalId<T>>, IDBR
   }
   async create(item: OptionalId<T>): Promise<boolean> {
     try {
-      Logger.info("ITEM", item)
+      Logger.info(item)
       const result: InsertOneResult = await this._collection.insertOne(item)
       // this._db.
       return !!result.acknowledged
@@ -28,7 +28,7 @@ export abstract class BaseRepository<T> implements IDBWrite<OptionalId<T>>, IDBR
       return Promise.reject(e)
     }
   }
-  async update(field: OptionalId<T>, item: any) {
+  async update(field: Filter<T>, item: any) {
     try {
       const updateResult = await this._collection.updateOne(field, { $set: item });
       console.log(updateResult)
@@ -43,7 +43,7 @@ export abstract class BaseRepository<T> implements IDBWrite<OptionalId<T>>, IDBR
       return Promise.reject(e)
     }
   }
-  async delete(field: OptionalId<T>): Promise<DeleteResult> {
+  async delete(field: Filter<T>): Promise<DeleteResult> {
     try {
       const result: DeleteResult = await this._collection.deleteOne(field)
       return Promise.resolve(result)
@@ -74,6 +74,7 @@ export abstract class BaseRepository<T> implements IDBWrite<OptionalId<T>>, IDBR
   }
   async findOne(_item: Filter<T>): Promise<T | null> {
     try {
+      Logger.info(_item)
       const result = await this._collection.findOne(_item)
       
       return Promise.resolve(result)

@@ -5,6 +5,6 @@ import blogRouter from "./blog"
 const router = Router();
 
 
-router.use("/blog", blogRouter)
+router.use("/blogs", blogRouter)
 
 export default router

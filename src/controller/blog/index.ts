@@ -1,5 +1,6 @@
 import { IBlog } from "Entities/Blog";
 import {Request, Response} from "express";
+import { ObjectId } from "mongodb";
 import { initializeBlogRepository } from "repository/setup";
 
 const blogController = {
@@ -18,30 +19,55 @@ const blogController = {
       return res.status(500).json(e)
     }
   },
+  /**
+   * 
+   * @param _req 
+   * @param res 
+   * @desc u can pass filters for pagination
+   * @returns 
+   */
   getAllBlogs: async (_req:Request, res:Response) => {
     try {
-      
+      const repository = await initializeBlogRepository()
+      const filters = {limit:3}
+      const blogs = await repository.find(filters)
+      return res.status(201).json({blogs})
+
     } catch (e) {
       return res.status(500).json(e)
     }
   },
-  getBlog: async (_req:Request, res:Response) => {
+  getBlog: async (req:Request, res:Response) => {
     try {
-      
+      const blogId = req.params.id
+      console.log(blogId)
+      const repository = await initializeBlogRepository()
+      const blogs = await repository.findOne({_id: new ObjectId(blogId)})
+      return res.status(201).json({blogs})
+
     } catch (e) {
       return res.status(500).json(e)
     }
   },
-  deleteBlog: async (_req:Request, res:Response) => {
+  deleteBlog: async (req:Request, res:Response) => {
     try {
-      
+      const blogId = new ObjectId(req.params.id) 
+      console.log(blogId)
+      const repository = await initializeBlogRepository()
+      const blogs = await repository.delete({_id:blogId})
+      return res.status(201).json({blogs})
+
     } catch (e) {
       return res.status(500).json(e)
     }
   },
-  updateBlog: async (_req:Request, res:Response) => {
+  updateBlog: async (req:Request, res:Response) => {
     try {
-      
+      const blogId = new ObjectId(req.params.id) 
+      console.log(blogId)
+      const repository = await initializeBlogRepository()
+      await repository.update({ _id:blogId}, { post:"Updated"})
+      return res.status(201).json({msg:"Blog successfully updated"})
     } catch (e) {
       return res.status(500).json(e)
     }

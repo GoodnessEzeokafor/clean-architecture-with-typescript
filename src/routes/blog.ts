@@ -4,11 +4,11 @@ import blogController from "controller/blog"
 const router = Router();
 const { createBlog, getAllBlogs, getBlog, deleteBlog, updateBlog } = blogController;
 
-router.post("/blog", createBlog)
-router.get("/blogs", getAllBlogs)
-router.get("/blog/:id", getBlog)
-router.put("/blog/:id", updateBlog)
-router.delete("/blog/:id", deleteBlog)
+router.post("/", createBlog)
+router.get("/", getAllBlogs)
+router.get("/:id", getBlog)
+router.put("/:id", updateBlog)
+router.delete("/:id", deleteBlog)
 
 
 
