@@ -31,6 +31,8 @@ const format = winston.format.combine(
   // Define the format of the message showing the timestamp, the level and the message
   winston.format.printf(
     (info) => `${info.level}: ${info.message} - ${info.timestamp} `,
+    // (error) => `${info.level}: ${info.message} - ${info.timestamp} `,
+    
   ),
 )
 
