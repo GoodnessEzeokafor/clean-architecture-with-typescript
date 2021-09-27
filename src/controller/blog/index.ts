@@ -29,8 +29,8 @@ const blogController = {
   getAllBlogs: async (_req:Request, res:Response) => {
     try {
       const repository = await initializeBlogRepository()
-      const filters = {limit:3}
-      const blogs = await repository.find(filters)
+      // const filters = {limit:3}
+      const blogs = await repository.find()
       return res.status(201).json({blogs})
 
     } catch (e) {

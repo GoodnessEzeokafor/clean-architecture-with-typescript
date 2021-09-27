@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/GoodnessEzeokafor/clean-architecture-with-typescript#readme",
   "dependencies": {
+    "apicache": "^1.6.2",
     "compression": "^1.7.4",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -40,6 +41,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/apicache": "^1.6.0",
     "@types/compression": "^1.7.2",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.0.2",
